@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace OptimaToPP
 {
@@ -30,7 +31,7 @@ namespace OptimaToPP
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFile = new OpenFileDialog();
-            OpenFile.Filter = "(*.xml)|*.xml";
+            //OpenFile.Filter = "(*.xls)|*.xml";
             if (OpenFile.ShowDialog() == DialogResult.OK)
             {
                 XlsOpenPath = OpenFile.FileName;
@@ -60,8 +61,13 @@ namespace OptimaToPP
             saveFileDialog1.ShowDialog();
             SaveXmlPath = saveFileDialog1.FileName;
 
+            GenerateObjectFromCSV(CsvSavePath);
+           // File.WriteAllText(SaveXmlPath, @file);
 
-          
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.LoadXml(file);
+            xdoc.Save(SaveXmlPath);
+
         }
 
         public void btnConvert_Click(object sender, EventArgs e)
@@ -76,6 +82,8 @@ namespace OptimaToPP
             {
                 MessageBox.Show("Ścieżka do pliku XLS nie może być pusta!");
             }
+
+
         }
 
         public void GenerateObjectFromCSV (string PathToCsv)
@@ -90,11 +98,16 @@ namespace OptimaToPP
             }
             
 
-            file = "<?xml version=\"1.0\" encoding=\"UTF - 8\"?>" +
-                "<transactions>";
+            file = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<transactions>\n" +
+                "<range>\n" +
+                "<from>2017-11-10</from>\n" +
+                "<to>2017-11-11</to>\n" +
+                "<sections>Sprzedane</sections>\n" +
+                "</range>";
             foreach (var o in packs)
             {
-                string adress = string.Format($"{o.RecipientAdress} {o.RecipientNoHome} / {o.RecipientNoHome2}");
+                string adress = string.Format($"{o.RecipientAdress} {o.RecipientNoHome}  {o.RecipientNoHome2}");
                 string payment;
                 if (o.RecipientPayment == "pobranie")
                 {
@@ -102,26 +115,60 @@ namespace OptimaToPP
                 }
                 else
                 {
-                    payment = o.RecipientPayment;
+                    payment = "Płatność elektroniczna";
                 }
 
-                file += "<transaction>";
+                file += "<transaction>\n";
 
                 file += "<parentId/> \n" +
-                        "<Id/>\n" +
-                        "<Name/>\n" +
-                        "<OrderId/>\n" +
+                        "<Id>35285349</Id>\n" +
+                        "<Name>Wąż asenizacyjny superelastyczny 45mm</Name>\n" +
+                        "<OrderId>6874226388</OrderId>\n" +
+                        "<CustomerLogin>xx</CustomerLogin>\n"+
+                        "<CustomerEmail>damian@valvotec.pl</CustomerEmail>\n" +
+                        "<CustomerName>" + o.RecipientName + "</CustomerName>\n" +
+                        "<CustomerPhone>508635104</CustomerPhone>\n" +
+                        "<CustomerAddress>" + adress + "</CustomerAddress>\n" +
+                        "<CustomerZip>" + o.RecipientZIP + "</CustomerZip>\n" +
+                        "<CustomerCity>" + o.RecipientCity + "</CustomerCity>\n" +
+                        "<CustomerCountryCode>PL</CustomerCountryCode>\n" +
+                        "<CustomerCountryName>Polska</CustomerCountryName>\n" +
                         "<RecipientName>"+ o.RecipientName+ "</RecipientName>\n" +
-                        " <RecipientPhone>508635104</RecipientPhone>" +
+                        "<RecipientCompanyName/>\n" +
+                        "<RecipientPhone>508635104</RecipientPhone>\n" +
                         "<RecipientAdress>" +adress+ "</RecipientAdress>\n" +
                         "<RecipientZip>"+o.RecipientZIP+"</RecipientZip>\n" +
                         "<RecipientCity>"+o.RecipientCity+"</RecipientCity>\n" +
                         "<RecipientCountryCode>PL</RecipientCountryCode>\n" +
                         "<RecipientCountryName>Polska</RecipientCountryName>\n" +
+                        "<InvoiceName/>\n"+
+                        "<InvoiceCompanyName/>\n"+
+                        "<InvoiceAddress/>\n"+
+                        "<InvoiceZip/>\n"+
+                        "<InvoiceCity/>\n"+
+                        "<InvoiceCountryCode/>\n"+
+                        "<InvoiceCountryName/>\n"+
+                        "<VAT-ID/>\n"+
                         "<Total>"+o.Total+"</Total>\n" +
-                        "<PaymentType>"+payment+"</PaymentType>";
+                        "<Currency>PLN</Currency>\n" +
+                        "<ExchangeRate>1</ExchangeRate>\n" +
+                        "<SellDate>2017-11-10</SellDate>\n" +
+                        "<DeliveryCost>14</DeliveryCost>\n" +
+                        "<DeliveryType>Przesyłka kurierska</DeliveryType>\n"+
+                        "<PaymentType>"+payment+"</PaymentType>\n"+
+                        "<SellerId>14032223</SellerId>\n"+
+                        "<positions>\n" +
+                        "<position>\n" +
+                        "<transactionId>35285349</transactionId>\n" +
+                        "<Name/>\n" +
+                        "<Quantity>3</Quantity>\n" +
+                        "<Price>23.5</Price>\n" +
+                        "<OfferName>Wąż asenizacyjny superelastyczny 45mm</OfferName>\n" +
+                        "<Signature/>\n" +
+                        "</position>\n" +
+                        "</positions>\n";
                                 
-                file += "</transaction>";
+                file += "</transaction>\n";
 
             }
 
