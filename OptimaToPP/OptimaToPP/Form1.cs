@@ -17,7 +17,7 @@ namespace OptimaToPP
     {
         string TempPath = Path.GetTempPath();
         string XlsOpenPath, CsvSavePath, XMLsavePath;
-
+        string file;
         public Form1()
         {
             InitializeComponent();
@@ -88,18 +88,39 @@ namespace OptimaToPP
                 reader.Configuration.RegisterClassMap<PackMap>();
                 packs = reader.GetRecords<Pack>().ToList();
             }
-            string file;
+            
 
             file = "<?xml version=\"1.0\" encoding=\"UTF - 8\"?>" +
                 "<transactions>";
             foreach (var o in packs)
             {
+                string adress = string.Format($"{o.RecipientAdress} {o.RecipientNoHome} / {o.RecipientNoHome2}");
+                string payment;
+                if (o.RecipientPayment == "pobranie")
+                {
+                    payment = "Przy odbiorze (za pobraniem)";
+                }
+                else
+                {
+                    payment = o.RecipientPayment;
+                }
+
                 file += "<transaction>";
 
-
-
-
-
+                file += "<parentId/> \n" +
+                        "<Id/>\n" +
+                        "<Name/>\n" +
+                        "<OrderId/>\n" +
+                        "<RecipientName>"+ o.RecipientName+ "</RecipientName>\n" +
+                        " <RecipientPhone>508635104</RecipientPhone>" +
+                        "<RecipientAdress>" +adress+ "</RecipientAdress>\n" +
+                        "<RecipientZip>"+o.RecipientZIP+"</RecipientZip>\n" +
+                        "<RecipientCity>"+o.RecipientCity+"</RecipientCity>\n" +
+                        "<RecipientCountryCode>PL</RecipientCountryCode>\n" +
+                        "<RecipientCountryName>Polska</RecipientCountryName>\n" +
+                        "<Total>"+o.Total+"</Total>\n" +
+                        "<PaymentType>"+payment+"</PaymentType>";
+                                
                 file += "</transaction>";
 
             }
