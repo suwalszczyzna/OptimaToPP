@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +22,7 @@ namespace OptimaToPP
         {
             InitializeComponent();
             groupBox2.Enabled = false;
-            CsvSavePath = "C:\\Users\\dsuwa\\Desktop\\tempFV.txt";
+            CsvSavePath = "C:\\Users\\dsuwa\\Desktop\\tempFV.csv";
             XLSpath.Text = "";
 
         }
@@ -29,6 +30,7 @@ namespace OptimaToPP
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFile = new OpenFileDialog();
+            OpenFile.Filter = "(*.xml)|*.xml";
             if (OpenFile.ShowDialog() == DialogResult.OK)
             {
                 XlsOpenPath = OpenFile.FileName;
@@ -36,7 +38,31 @@ namespace OptimaToPP
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
 
+            GenerateObjectFromCSV(CsvSavePath);
+            string SaveXmlPath;
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            {
+                InitialDirectory = (@"C:\"),
+                Title = "Zapisz plik XML",
+                FileName = "wysylki.xml",
+                CheckFileExists = false,
+                CheckPathExists = true,
+                DefaultExt = ".xml",
+                Filter = "(*.xml)|*.xml",
+                FilterIndex = 2,
+                RestoreDirectory = true
+            };
+
+            saveFileDialog1.ShowDialog();
+            SaveXmlPath = saveFileDialog1.FileName;
+
+
+          
+        }
 
         public void btnConvert_Click(object sender, EventArgs e)
         {
@@ -52,7 +78,34 @@ namespace OptimaToPP
             }
         }
 
+        public void GenerateObjectFromCSV (string PathToCsv)
+        {
+            var packs = new List<Pack>();
+            using (var streamReader = File.OpenText(PathToCsv))
+            {
+                var reader = new CsvReader(streamReader);
+                reader.Configuration.Delimiter = ";";
+                reader.Configuration.RegisterClassMap<PackMap>();
+                packs = reader.GetRecords<Pack>().ToList();
+            }
+            string file;
 
+            file = "<?xml version=\"1.0\" encoding=\"UTF - 8\"?>" +
+                "<transactions>";
+            foreach (var o in packs)
+            {
+                file += "<transaction>";
+
+
+
+
+
+                file += "</transaction>";
+
+            }
+
+            file += "</transactions>";
+        }
 
 
 

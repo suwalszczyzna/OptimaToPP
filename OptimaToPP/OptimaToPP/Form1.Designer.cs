@@ -30,11 +30,11 @@
         {
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnConvert = new System.Windows.Forms.Button();
+            this.btnOpenFile = new System.Windows.Forms.Button();
+            this.XLSpath = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.XLSpath = new System.Windows.Forms.TextBox();
-            this.btnOpenFile = new System.Windows.Forms.Button();
-            this.btnConvert = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +61,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Wskaż plik XLS";
             // 
+            // btnConvert
+            // 
+            this.btnConvert.Location = new System.Drawing.Point(6, 68);
+            this.btnConvert.Name = "btnConvert";
+            this.btnConvert.Size = new System.Drawing.Size(423, 41);
+            this.btnConvert.TabIndex = 2;
+            this.btnConvert.Text = "Konwertuj";
+            this.btnConvert.UseVisualStyleBackColor = true;
+            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Location = new System.Drawing.Point(6, 21);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(120, 41);
+            this.btnOpenFile.TabIndex = 1;
+            this.btnOpenFile.Text = "Otwórz plik";
+            this.btnOpenFile.UseVisualStyleBackColor = true;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
+            // 
+            // XLSpath
+            // 
+            this.XLSpath.Location = new System.Drawing.Point(149, 30);
+            this.XLSpath.Name = "XLSpath";
+            this.XLSpath.Size = new System.Drawing.Size(280, 22);
+            this.XLSpath.TabIndex = 0;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button1);
@@ -77,35 +104,9 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(423, 41);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Eksportuj plik XLM";
+            this.button1.Text = "Eksportuj plik XML";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // XLSpath
-            // 
-            this.XLSpath.Location = new System.Drawing.Point(149, 30);
-            this.XLSpath.Name = "XLSpath";
-            this.XLSpath.Size = new System.Drawing.Size(280, 22);
-            this.XLSpath.TabIndex = 0;
-            // 
-            // btnOpenFile
-            // 
-            this.btnOpenFile.Location = new System.Drawing.Point(6, 21);
-            this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(120, 41);
-            this.btnOpenFile.TabIndex = 1;
-            this.btnOpenFile.Text = "Otwórz plik";
-            this.btnOpenFile.UseVisualStyleBackColor = true;
-            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
-            // 
-            // btnConvert
-            // 
-            this.btnConvert.Location = new System.Drawing.Point(6, 68);
-            this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(423, 41);
-            this.btnConvert.TabIndex = 2;
-            this.btnConvert.Text = "Konwertuj";
-            this.btnConvert.UseVisualStyleBackColor = true;
-            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 

@@ -55,7 +55,7 @@ namespace OptimaToPP
                     bool firstLine = true;
                     foreach (DataColumn col in dt.Columns)
                     {
-                        if (!firstLine) { wtr.Write(","); } else { firstLine = false; }
+                        if (!firstLine) { wtr.Write(";"); } else { firstLine = false; }
                         var data = row[col.ColumnName].ToString().Replace("\"", "\"\"");
                         wtr.Write(String.Format("\"{0}\"", data));
                     }
