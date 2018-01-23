@@ -24,7 +24,7 @@ namespace OptimaToPP
 
         {
             InitializeComponent();
-            this.Text = "Optima & PP - konwerter";
+            this.Text = "Optima & PP - integrator";
             this.AutoScaleMode = AutoScaleMode.Dpi;
             groupBox2.Enabled = false;
             CsvSavePath = string.Format(@"{0}optima_to_pp_temp.csv", tempPath);
