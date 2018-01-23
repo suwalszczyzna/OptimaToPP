@@ -16,8 +16,10 @@ namespace OptimaToPP
         public static void ConvertExcelToCsv(string excelFilePath, string csvOutputFile, int worksheetNumber = 1)
         {
             if (!File.Exists(excelFilePath)) throw new FileNotFoundException(excelFilePath);
-            if (File.Exists(csvOutputFile)) throw new ArgumentException("File exists: " + csvOutputFile);
-
+            if (File.Exists(csvOutputFile))
+            {
+                File.Delete(csvOutputFile);
+            }
             // connection string
             var cnnStr = String.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties=\"Excel 8.0;IMEX=1;HDR=NO\"", excelFilePath);
             var cnn = new OleDbConnection(cnnStr);

@@ -18,13 +18,14 @@ namespace OptimaToPP
     {
         string TempPath = Path.GetTempPath();
         string XlsOpenPath, CsvSavePath;
-        string file;
         List<Pack> packs = new List<Pack>();
         string tempPath = System.IO.Path.GetTempPath();
         public Form1()
 
         {
             InitializeComponent();
+            this.Text = "Optima & PP - konwerter";
+            this.AutoScaleMode = AutoScaleMode.Dpi;
             groupBox2.Enabled = false;
             CsvSavePath = string.Format(@"{0}optima_to_pp_temp.csv", tempPath);
             XLSpath.Text = "";
@@ -47,16 +48,18 @@ namespace OptimaToPP
 
             GenerateObjectFromCSV(CsvSavePath);
             string SaveXlsPath;
+            DateTime dateTime = DateTime.UtcNow.Date;
+            string todayDate = dateTime.ToString("dd-MM-yyyy");
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog
             {
-                InitialDirectory = (@"C:\"),
-                Title = "Zapisz plik XLSX",
-                FileName = "wysylki.xls",
+                InitialDirectory = (string.Format(@"{0}",Environment.SpecialFolder.Personal)),
+                Title = "Zapisz plik XLS",
+                FileName = "wysylki" + todayDate,
                 CheckFileExists = false,
                 CheckPathExists = true,
-                DefaultExt = ".xlsx",
-                Filter = "(*.xlsx)|*.xlsx",
+                DefaultExt = ".xls",
+                Filter = "(*.xls)|*.xls",
                 FilterIndex = 2,
                 RestoreDirectory = true
             };
@@ -64,14 +67,9 @@ namespace OptimaToPP
             saveFileDialog1.ShowDialog();
             SaveXlsPath = saveFileDialog1.FileName;
 
-            if (File.Exists(CsvSavePath))
-            {
-                File.Delete(CsvSavePath);
-            }
-
             GenerateObjectFromCSV(CsvSavePath);
             ExportToExcel(packs, SaveXlsPath);
-           
+
 
         }
 
@@ -91,18 +89,32 @@ namespace OptimaToPP
 
         }
 
-        public void GenerateObjectFromCSV (string PathToCsv)
+        public void GenerateObjectFromCSV(string PathToCsv)
         {
-            
-            using (var streamReader = File.OpenText(PathToCsv))
+            try
             {
-                var reader = new CsvReader(streamReader);
-                reader.Configuration.Delimiter = ";";
-                reader.Configuration.RegisterClassMap<PackMap>();
-                packs = reader.GetRecords<Pack>().ToList();
+                using (var streamReader = File.OpenText(PathToCsv))
+                {
+                    var reader = new CsvReader(streamReader);
+                    reader.Configuration.Delimiter = ";";
+                    reader.Configuration.RegisterClassMap<PackMap>();
+                    packs = reader.GetRecords<Pack>().ToList();
+                }
             }
-            
+            catch (Exception e)
+            {
+                MessageBox.Show(string.Format("{0}", e));
 
+            }
+
+
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = "mailto:damian.suwala@gmail.com?subject=Kontakt_Optima_PocztaPolska_Konwerter";
+            proc.Start();
         }
 
         public void ExportToExcel(List<Pack> packs, string fileName)
@@ -157,25 +169,30 @@ namespace OptimaToPP
                     {
                         workSheet.Cells[row, "N"] = pack.Total;
                         //workSheet.Cells[row, "O"] = "62150015201215200779280000";
-                        workSheet.Cells[row, "P"] = string.Format("UZNANIE Poczta-Polska, {0}", pack.DocNumber);
+                        workSheet.Cells[row, "P"] = string.Format("UZNANIE Poczta Polska, {0}", pack.DocNumber);
                     }
                     workSheet.Cells[row, "R"] = string.Format("{0}", pack.DocNumber);
                     workSheet.Cells[row, "S"] = string.Format("{0}", pack.DocNumber);
                     workSheet.Cells[row, "T"] = "N";
 
-                    
-                        row++;
-                    
+                    row++;
+
                 }
 
-                workSheet.SaveAs(fileName);
-                
-                MessageBox.Show(string.Format("{0} \n Zapisano", fileName));
+                //fix for last bad row
+                workSheet.Cells[row-1, "I"] = "";
+                workSheet.Cells[row-1, "M"] = "";
+                workSheet.Cells[row-1, "T"] = "";
+
+                workSheet.SaveAs(fileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlExcel8);
+
+                MessageBox.Show(string.Format("Zapisano \n{0}", fileName));
+                this.Close();
             }
             catch (Exception exception)
             {
                 MessageBox.Show("Exception",
-                    "There was a PROBLEM saving Excel file!\n" + exception.Message,
+                    "Błąd podczas zapisu pliku\n" + exception.Message,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
