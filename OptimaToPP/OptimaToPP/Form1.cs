@@ -17,13 +17,16 @@ namespace OptimaToPP
     public partial class Form1 : Form
     {
         string TempPath = Path.GetTempPath();
-        string XlsOpenPath, CsvSavePath, XMLsavePath;
+        string XlsOpenPath, CsvSavePath;
         string file;
+        List<Pack> packs = new List<Pack>();
+        string tempPath = System.IO.Path.GetTempPath();
         public Form1()
+
         {
             InitializeComponent();
             groupBox2.Enabled = false;
-            CsvSavePath = "C:\\Users\\dsuwa\\Desktop\\tempFV.csv";
+            CsvSavePath = string.Format(@"{0}optima_to_pp_temp.csv", tempPath);
             XLSpath.Text = "";
 
         }
@@ -31,7 +34,7 @@ namespace OptimaToPP
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFile = new OpenFileDialog();
-            //OpenFile.Filter = "(*.xls)|*.xml";
+            OpenFile.Filter = "(*.xls)|*.xls";
             if (OpenFile.ShowDialog() == DialogResult.OK)
             {
                 XlsOpenPath = OpenFile.FileName;
@@ -43,30 +46,32 @@ namespace OptimaToPP
         {
 
             GenerateObjectFromCSV(CsvSavePath);
-            string SaveXmlPath;
+            string SaveXlsPath;
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog
             {
                 InitialDirectory = (@"C:\"),
-                Title = "Zapisz plik XML",
-                FileName = "wysylki.xml",
+                Title = "Zapisz plik XLSX",
+                FileName = "wysylki.xls",
                 CheckFileExists = false,
                 CheckPathExists = true,
-                DefaultExt = ".xml",
-                Filter = "(*.xml)|*.xml",
+                DefaultExt = ".xlsx",
+                Filter = "(*.xlsx)|*.xlsx",
                 FilterIndex = 2,
                 RestoreDirectory = true
             };
 
             saveFileDialog1.ShowDialog();
-            SaveXmlPath = saveFileDialog1.FileName;
+            SaveXlsPath = saveFileDialog1.FileName;
+
+            if (File.Exists(CsvSavePath))
+            {
+                File.Delete(CsvSavePath);
+            }
 
             GenerateObjectFromCSV(CsvSavePath);
-           // File.WriteAllText(SaveXmlPath, @file);
-
-            XmlDocument xdoc = new XmlDocument();
-            xdoc.LoadXml(file);
-            xdoc.Save(SaveXmlPath);
+            ExportToExcel(packs, SaveXlsPath);
+           
 
         }
 
@@ -88,7 +93,7 @@ namespace OptimaToPP
 
         public void GenerateObjectFromCSV (string PathToCsv)
         {
-            var packs = new List<Pack>();
+            
             using (var streamReader = File.OpenText(PathToCsv))
             {
                 var reader = new CsvReader(streamReader);
@@ -98,84 +103,108 @@ namespace OptimaToPP
             }
             
 
-            file = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<transactions>\n" +
-                "<range>\n" +
-                "<from>2017-11-10</from>\n" +
-                "<to>2017-11-11</to>\n" +
-                "<sections>Sprzedane</sections>\n" +
-                "</range>";
-            foreach (var o in packs)
-            {
-                string adress = string.Format($"{o.RecipientAdress} {o.RecipientNoHome}  {o.RecipientNoHome2}");
-                string payment;
-                if (o.RecipientPayment == "pobranie")
-                {
-                    payment = "Przy odbiorze (za pobraniem)";
-                }
-                else
-                {
-                    payment = "Płatność elektroniczna";
-                }
-
-                file += "<transaction>\n";
-
-                file += "<parentId/> \n" +
-                        "<Id>35285349</Id>\n" +
-                        "<Name>Wąż asenizacyjny superelastyczny 45mm</Name>\n" +
-                        "<OrderId>6874226388</OrderId>\n" +
-                        "<CustomerLogin>xx</CustomerLogin>\n"+
-                        "<CustomerEmail>damian@valvotec.pl</CustomerEmail>\n" +
-                        "<CustomerName>" + o.RecipientName + "</CustomerName>\n" +
-                        "<CustomerPhone>508635104</CustomerPhone>\n" +
-                        "<CustomerAddress>" + adress + "</CustomerAddress>\n" +
-                        "<CustomerZip>" + o.RecipientZIP + "</CustomerZip>\n" +
-                        "<CustomerCity>" + o.RecipientCity + "</CustomerCity>\n" +
-                        "<CustomerCountryCode>PL</CustomerCountryCode>\n" +
-                        "<CustomerCountryName>Polska</CustomerCountryName>\n" +
-                        "<RecipientName>"+ o.RecipientName+ "</RecipientName>\n" +
-                        "<RecipientCompanyName/>\n" +
-                        "<RecipientPhone>508635104</RecipientPhone>\n" +
-                        "<RecipientAdress>" +adress+ "</RecipientAdress>\n" +
-                        "<RecipientZip>"+o.RecipientZIP+"</RecipientZip>\n" +
-                        "<RecipientCity>"+o.RecipientCity+"</RecipientCity>\n" +
-                        "<RecipientCountryCode>PL</RecipientCountryCode>\n" +
-                        "<RecipientCountryName>Polska</RecipientCountryName>\n" +
-                        "<InvoiceName/>\n"+
-                        "<InvoiceCompanyName/>\n"+
-                        "<InvoiceAddress/>\n"+
-                        "<InvoiceZip/>\n"+
-                        "<InvoiceCity/>\n"+
-                        "<InvoiceCountryCode/>\n"+
-                        "<InvoiceCountryName/>\n"+
-                        "<VAT-ID/>\n"+
-                        "<Total>"+o.Total+"</Total>\n" +
-                        "<Currency>PLN</Currency>\n" +
-                        "<ExchangeRate>1</ExchangeRate>\n" +
-                        "<SellDate>2017-11-10</SellDate>\n" +
-                        "<DeliveryCost>14</DeliveryCost>\n" +
-                        "<DeliveryType>Przesyłka kurierska</DeliveryType>\n"+
-                        "<PaymentType>"+payment+"</PaymentType>\n"+
-                        "<SellerId>14032223</SellerId>\n"+
-                        "<positions>\n" +
-                        "<position>\n" +
-                        "<transactionId>35285349</transactionId>\n" +
-                        "<Name/>\n" +
-                        "<Quantity>3</Quantity>\n" +
-                        "<Price>23.5</Price>\n" +
-                        "<OfferName>Wąż asenizacyjny superelastyczny 45mm</OfferName>\n" +
-                        "<Signature/>\n" +
-                        "</position>\n" +
-                        "</positions>\n";
-                                
-                file += "</transaction>\n";
-
-            }
-
-            file += "</transactions>";
         }
 
+        public void ExportToExcel(List<Pack> packs, string fileName)
+        {
+            // Load Excel application
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
 
+            // Create empty workbook
+            excel.Workbooks.Add();
+
+            // Create Worksheet from active sheet
+            Microsoft.Office.Interop.Excel._Worksheet workSheet = excel.ActiveSheet;
+
+
+
+            try
+            {
+
+                workSheet.Cells[1, "A"] = "NumerNadania";
+                workSheet.Cells[1, "B"] = "AdresatNazwa";
+                workSheet.Cells[1, "C"] = "AdresatNazwaCd";
+                workSheet.Cells[1, "D"] = "AdresatUlica";
+                workSheet.Cells[1, "E"] = "AdresatNumerDomu";
+                workSheet.Cells[1, "F"] = "AdresatNumerLokalu";
+                workSheet.Cells[1, "G"] = "AdresatKodPocztowy";
+                workSheet.Cells[1, "H"] = "AdresatMiejscowosc";
+                workSheet.Cells[1, "I"] = "AdresatKraj";
+                workSheet.Cells[1, "J"] = "AdresatEmail";
+                workSheet.Cells[1, "K"] = "AdresatMobile";
+                workSheet.Cells[1, "L"] = "AdresatTelefon";
+                workSheet.Cells[1, "M"] = "Masa";
+                workSheet.Cells[1, "N"] = "KwotaPobrania";
+                workSheet.Cells[1, "O"] = "NRB";
+                workSheet.Cells[1, "P"] = "TytulPobrania";
+                workSheet.Cells[1, "R"] = "Uwagi";
+                workSheet.Cells[1, "S"] = "Zawartosc";
+                workSheet.Cells[1, "T"] = "UiszczaOplate";
+
+                int row = 2; // start row (in row 1 are header cells)
+                foreach (Pack pack in packs)
+                {
+                    workSheet.Cells[row, "B"] = pack.RecipientName;
+                    workSheet.Cells[row, "D"] = pack.RecipientAdress;
+                    workSheet.Cells[row, "E"] = pack.RecipientNoHome;
+                    workSheet.Cells[row, "F"] = pack.RecipientNoHome2;
+                    workSheet.Cells[row, "G"] = pack.RecipientZIP;
+                    workSheet.Cells[row, "H"] = pack.RecipientCity;
+                    workSheet.Cells[row, "I"] = "Polska";
+                    workSheet.Cells[row, "M"] = "30";
+
+                    if (pack.RecipientPayment == "Pobranie")
+                    {
+                        workSheet.Cells[row, "N"] = pack.Total;
+                        //workSheet.Cells[row, "O"] = "62150015201215200779280000";
+                        workSheet.Cells[row, "P"] = string.Format("UZNANIE Poczta-Polska, {0}", pack.DocNumber);
+                    }
+                    workSheet.Cells[row, "R"] = string.Format("{0}", pack.DocNumber);
+                    workSheet.Cells[row, "S"] = string.Format("{0}", pack.DocNumber);
+                    workSheet.Cells[row, "T"] = "N";
+
+                    
+                        row++;
+                    
+                }
+
+                workSheet.SaveAs(fileName);
+                
+                MessageBox.Show(string.Format("{0} \n Zapisano", fileName));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Exception",
+                    "There was a PROBLEM saving Excel file!\n" + exception.Message,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            finally
+            {
+                excel.Quit();
+
+                // Release COM objects (very important!)
+                if (excel != null)
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(excel);
+
+                if (workSheet != null)
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(workSheet);
+
+                // Empty variables
+                excel = null;
+                workSheet = null;
+
+                // Force garbage collector cleaning
+                GC.Collect();
+            }
+
+
+
+
+
+
+
+        }
 
     }
 }

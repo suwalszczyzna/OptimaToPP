@@ -35,10 +35,8 @@ namespace OptimaToPP
                 da.Fill(dt);
             }
             catch (Exception e)
-            {
-                // ???
-                throw e;
-                MessageBox.Show("" + e);
+            {                
+                MessageBox.Show(string.Format("{0}",e));
 
             }
             finally

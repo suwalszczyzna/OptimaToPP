@@ -14,13 +14,13 @@ namespace OptimaToPP
         {
 
             AutoMap();
-            Map(m => m.NrDocument).Name("Numer dokumentu");
-            Map(m => m.RecipientName).Name("Kontrahent");
-            Map(m => m.RecipientAdress).Name("Ulica");
-            Map(m => m.RecipientNoHome).Name("NR_DOMU");
-            Map(m => m.RecipientNoHome2).Name("NR_LOKALU");
-            Map(m => m.RecipientZIP).Name("KOD_POCZTOWY");
-            Map(m => m.RecipientCity).Name("Miasto");
+            Map(m => m.DocNumber).Name("Numer dokumentu");
+            Map(m => m.RecipientName).Name("Odbiorca");
+            Map(m => m.RecipientAdress).Name("ODBUlica");
+            Map(m => m.RecipientNoHome).Name("ODBNrDomu");
+            Map(m => m.RecipientNoHome2).Name("ODBNrLokalu");
+            Map(m => m.RecipientZIP).Name("ODBKod");
+            Map(m => m.RecipientCity).Name("ODBMiasto");
             Map(m => m.Total).Name("Brutto");
             Map(m => m.RecipientPayment).Name("Forma płatności");
 

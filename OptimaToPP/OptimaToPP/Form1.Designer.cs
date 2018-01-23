@@ -96,7 +96,7 @@
             this.groupBox2.Size = new System.Drawing.Size(448, 80);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Zapisz jako XML dla Poczty Polskiej";
+            this.groupBox2.Text = "Zapisz jako XLS dla Poczty Polskiej";
             // 
             // button1
             // 
@@ -104,7 +104,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(423, 41);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Eksportuj plik XML";
+            this.button1.Text = "Eksportuj plik XSL";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

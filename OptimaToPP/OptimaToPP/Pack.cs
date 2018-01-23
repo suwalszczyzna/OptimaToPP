@@ -8,7 +8,7 @@ namespace OptimaToPP
 {
     public class Pack
     {
-        public string NrDocument { get; set; }
+        public string DocNumber { get; set; }
         public string RecipientName { get; set; }
         public string RecipientAdress { get; set; }
         public string RecipientCity { get; set; }
