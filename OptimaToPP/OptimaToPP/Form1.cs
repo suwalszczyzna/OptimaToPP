@@ -153,22 +153,39 @@ namespace OptimaToPP
                 workSheet.Cells[1, "S"] = "Zawartosc";
                 workSheet.Cells[1, "T"] = "UiszczaOplate";
 
-                int row = 2; // start row (in row 1 are header cells)
+                int row = 2; 
                 foreach (Pack pack in packs)
                 {
-                    workSheet.Cells[row, "B"] = pack.RecipientName;
-                    workSheet.Cells[row, "D"] = pack.RecipientAdress;
-                    workSheet.Cells[row, "E"] = pack.RecipientNoHome;
-                    workSheet.Cells[row, "F"] = pack.RecipientNoHome2;
-                    workSheet.Cells[row, "G"] = pack.RecipientZIP;
-                    workSheet.Cells[row, "H"] = pack.RecipientCity;
+                    string street, city;
+                    
+
+                    if (!pack.PostCity.Equals(string.Format(pack.City)) && pack.PostCity.Length != 0 )
+                    {
+                        city = pack.PostCity;
+                        street = string.Format("{0}, ul. {1}", pack.City, pack.Street);
+                    }
+                    else
+                    {
+                        street = pack.Street;
+                        city = pack.City;
+                    }
+                    
+                    
+
+                    workSheet.Cells[row, "B"] = pack.Name;
+                    workSheet.Cells[row, "D"] = street;
+                    workSheet.Cells[row, "E"] = pack.NumberHome1;
+                    workSheet.Cells[row, "F"] = pack.NumberHome2;
+                    workSheet.Cells[row, "G"] = pack.ZipCode;
+                    workSheet.Cells[row, "H"] = city;
                     workSheet.Cells[row, "I"] = "Polska";
+                    workSheet.Cells[row, "J"] = pack.Email;
+                    workSheet.Cells[row, "K"] = pack.Phone;
                     workSheet.Cells[row, "M"] = "30";
 
-                    if (pack.RecipientPayment == "Pobranie")
+                    if (pack.Payment == "Pobranie")
                     {
                         workSheet.Cells[row, "N"] = pack.Total;
-                        //workSheet.Cells[row, "O"] = "62150015201215200779280000";
                         workSheet.Cells[row, "P"] = string.Format("UZNANIE Poczta Polska, {0}", pack.DocNumber);
                     }
                     workSheet.Cells[row, "R"] = string.Format("{0}", pack.DocNumber);
@@ -180,9 +197,6 @@ namespace OptimaToPP
                 }
 
                 //fix for last bad row
-                workSheet.Cells[row-1, "I"] = "";
-                workSheet.Cells[row-1, "M"] = "";
-                workSheet.Cells[row-1, "T"] = "";
 
                 workSheet.SaveAs(fileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlExcel8);
 

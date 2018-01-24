@@ -15,16 +15,21 @@ namespace OptimaToPP
 
             AutoMap();
             Map(m => m.DocNumber).Name("Numer dokumentu");
-            Map(m => m.RecipientName).Name("Odbiorca");
-            Map(m => m.RecipientAdress).Name("ODBUlica");
-            Map(m => m.RecipientNoHome).Name("ODBNrDomu");
-            Map(m => m.RecipientNoHome2).Name("ODBNrLokalu");
-            Map(m => m.RecipientZIP).Name("ODBKod");
-            Map(m => m.RecipientCity).Name("ODBMiasto");
+            Map(m => m.Name).Name("Odbiorca");
+            Map(m => m.Street).Name("ODBUlica");
+            Map(m => m.PostCity).Name("ODBPoczta");
+            Map(m => m.NumberHome1).Name("ODBNrDomu");
+            Map(m => m.NumberHome2).Name("ODBNrLokalu");
+            Map(m => m.ZipCode).Name("ODBKod");
+            Map(m => m.City).Name("ODBMiasto");
             Map(m => m.Total).Name("Brutto");
-            Map(m => m.RecipientPayment).Name("Forma płatności");
+            Map(m => m.Payment).Name("Forma płatności");
+            Map(m => m.Email).Name("ODBEmail");
+            Map(m => m.Phone).Name("ODBTelefonKom");
 
-                   
+
+
+
         }
     }
 }
