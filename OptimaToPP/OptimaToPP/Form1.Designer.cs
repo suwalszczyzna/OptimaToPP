@@ -72,7 +72,7 @@
             this.btnConvert.TabIndex = 2;
             this.btnConvert.Text = "Konwertuj";
             this.btnConvert.UseVisualStyleBackColor = true;
-            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
+            this.btnConvert.Click += new System.EventHandler(this.convertXLStoCsv);
             // 
             // btnOpenFile
             // 
@@ -109,7 +109,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Eksportuj plik XLS";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.saveXLSforPP);
             // 
             // label1
             // 

@@ -27,9 +27,6 @@ namespace OptimaToPP
             Map(m => m.Email).Name("ODBEmail");
             Map(m => m.Phone).Name("ODBTelefonKom");
 
-
-
-
         }
     }
 }

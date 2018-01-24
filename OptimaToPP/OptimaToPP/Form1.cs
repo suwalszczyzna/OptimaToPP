@@ -43,7 +43,7 @@ namespace OptimaToPP
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void saveXLSforPP(object sender, EventArgs e)
         {
 
             GenerateObjectFromCSV(CsvSavePath);
@@ -73,7 +73,7 @@ namespace OptimaToPP
 
         }
 
-        public void btnConvert_Click(object sender, EventArgs e)
+        public void convertXLStoCsv(object sender, EventArgs e)
         {
             if (XLSpath.Text != "")
             {
@@ -169,9 +169,7 @@ namespace OptimaToPP
                         street = pack.Street;
                         city = pack.City;
                     }
-                    
-                    
-
+                                  
                     workSheet.Cells[row, "B"] = pack.Name;
                     workSheet.Cells[row, "D"] = street;
                     workSheet.Cells[row, "E"] = pack.NumberHome1;
@@ -195,8 +193,6 @@ namespace OptimaToPP
                     row++;
 
                 }
-
-                //fix for last bad row
 
                 workSheet.SaveAs(fileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlExcel8);
 
