@@ -170,20 +170,33 @@ namespace OptimaToPP
                         city = pack.City;
                     }
                                   
-                    workSheet.Cells[row, "B"] = pack.Name;
-                    workSheet.Cells[row, "D"] = street;
-                    workSheet.Cells[row, "E"] = pack.NumberHome1;
-                    workSheet.Cells[row, "F"] = pack.NumberHome2;
-                    workSheet.Cells[row, "G"] = pack.ZipCode;
-                    workSheet.Cells[row, "H"] = city;
+                    workSheet.Cells[row, "B"] = string.Format(pack.Name);
+                    workSheet.Cells[row, "D"] = string.Format(street);
+                    workSheet.Cells[row, "E"] = string.Format(pack.NumberHome1);
+                    workSheet.Cells[row, "F"] = string.Format(pack.NumberHome2);
+                    workSheet.Cells[row, "G"] = string.Format(pack.ZipCode);
+                    workSheet.Cells[row, "H"] = string.Format(city);
                     workSheet.Cells[row, "I"] = "Polska";
-                    workSheet.Cells[row, "J"] = pack.Email;
-                    workSheet.Cells[row, "K"] = pack.Phone;
+                    workSheet.Cells[row, "J"] = string.Format(pack.Email);
+
+                    // Is mobile phone number or not?
+                    Boolean IsMobilePhone = MobilePhoneChecker(pack.Phone);
+                    if (IsMobilePhone)
+                    {
+                        workSheet.Cells[row, "K"] = string.Format(pack.Phone);
+                    }
+                    else
+                    {
+                        workSheet.Cells[row, "L"] = string.Format(pack.Phone);
+                    }
+
+                   
                     workSheet.Cells[row, "M"] = "30";
 
                     if (pack.Payment == "Pobranie")
                     {
-                        workSheet.Cells[row, "N"] = pack.Total;
+                        workSheet.Range["N2", "N" + row].NumberFormat = "####.00";
+                        workSheet.Cells[row, "N"] = Convert.ToDouble(pack.Total);
                         workSheet.Cells[row, "P"] = string.Format("UZNANIE Poczta Polska, {0}", pack.DocNumber);
                     }
                     workSheet.Cells[row, "R"] = string.Format("{0}", pack.DocNumber);
@@ -233,5 +246,32 @@ namespace OptimaToPP
 
         }
 
+        private bool MobilePhoneChecker(string phone)
+        {
+            StringComparison comparison = StringComparison.InvariantCulture;
+
+            int mobCounter = 0;
+            string[] DirectionsNumber = new string[] {"12","13","14","15","16","17","18","22","23","24","25","29","32","33","34","41","42","43","44","46","48","52","54","55","56","58","59","61","62","63","65","67","68","71","74","75","76","77","81","82","83","84","85","86","87","89","91","94","95"};
+
+            for(int i=0; i < DirectionsNumber.Length; i++)
+            {
+                if ((phone.StartsWith(DirectionsNumber[i], comparison))){
+
+                    mobCounter++;
+
+                } 
+                
+
+            }
+
+            if (mobCounter > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
