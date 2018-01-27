@@ -54,18 +54,20 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.AutoSize = true;
             this.groupBox1.Controls.Add(this.btnConvert);
             this.groupBox1.Controls.Add(this.btnOpenFile);
             this.groupBox1.Controls.Add(this.XLSpath);
             this.groupBox1.Location = new System.Drawing.Point(13, 26);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(448, 127);
+            this.groupBox1.Size = new System.Drawing.Size(448, 130);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Wskaż plik XLS";
             // 
             // btnConvert
             // 
+            this.btnConvert.AutoSize = true;
             this.btnConvert.Location = new System.Drawing.Point(6, 68);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(423, 41);
@@ -76,6 +78,7 @@
             // 
             // btnOpenFile
             // 
+            this.btnOpenFile.AutoSize = true;
             this.btnOpenFile.Location = new System.Drawing.Point(6, 21);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(120, 41);
@@ -93,16 +96,18 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.AutoSize = true;
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Location = new System.Drawing.Point(18, 159);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(448, 80);
+            this.groupBox2.Size = new System.Drawing.Size(448, 83);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Zapisz jako XLS dla Poczty Polskiej";
             // 
             // button1
             // 
+            this.button1.AutoSize = true;
             this.button1.Location = new System.Drawing.Point(6, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(423, 41);
@@ -151,6 +156,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
