@@ -10,3 +10,16 @@ C:\Users\dsuwa\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\Optim
 C:\Users\dsuwa\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\OptimaToPP.csproj.CoreCompileInputs.cache
 C:\Users\dsuwa\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\OptimaToPP.exe
 C:\Users\dsuwa\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\OptimaToPP.pdb
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Debug\OptimaToPP.exe.config
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Debug\OptimaToPP.exe
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Debug\OptimaToPP.pdb
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Debug\CsvHelper.dll
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Debug\CsvHelper.xml
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\OptimaToPP.csprojAssemblyReference.cache
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\OptimaToPP.Form1.resources
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\OptimaToPP.Properties.Resources.resources
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\OptimaToPP.csproj.GenerateResource.cache
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\OptimaToPP.csproj.CoreCompileInputs.cache
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\OptimaToPP.csproj.CopyComplete
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\OptimaToPP.exe
+C:\Users\damian\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Debug\OptimaToPP.pdb
