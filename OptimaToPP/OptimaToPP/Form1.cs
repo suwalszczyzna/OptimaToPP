@@ -161,8 +161,17 @@ namespace OptimaToPP
                         street = pack.Street;
                         city = pack.City;
                     }
-                                  
-                    workSheet.Cells[row, "B"] = string.Format(pack.Name);
+
+                    if (pack.Name.Length > 60)
+                    {
+                        workSheet.Cells[row, "B"] = string.Format(pack.Name.Substring(0, 60));
+                        workSheet.Cells[row, "C"] = string.Format(pack.Name.Substring(61));
+                    }
+                    else
+                    {
+                        workSheet.Cells[row, "B"] = string.Format(pack.Name);
+                    }
+                   
                     workSheet.Cells[row, "D"] = string.Format(street);
                     workSheet.Cells[row, "E"] = string.Format(pack.NumberHome1);
                     workSheet.Cells[row, "F"] = string.Format(pack.NumberHome2);
@@ -171,8 +180,10 @@ namespace OptimaToPP
                     workSheet.Cells[row, "I"] = "Polska";
                     workSheet.Cells[row, "J"] = string.Format(pack.Email);
 
-                    // Is mobile phone number?
+                    
+                    pack.Phone = PhoneChecker.CleanPhoneNumber(pack.Phone);
 
+                    // Is mobile phone number?
                     if (PhoneChecker.IsMobile(pack.Phone))
                     {
                         workSheet.Cells[row, "K"] = string.Format(pack.Phone);
