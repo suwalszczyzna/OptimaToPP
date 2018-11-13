@@ -45,7 +45,6 @@ namespace OptimaToPP
 
         private void saveXLSforPP(object sender, EventArgs e)
         {
-
             GenerateObjectFromCSV(CsvSavePath);
             string SaveXlsPath;
             DateTime dateTime = DateTime.UtcNow.Date;
@@ -69,8 +68,6 @@ namespace OptimaToPP
 
             GenerateObjectFromCSV(CsvSavePath);
             ExportToExcel(packs, SaveXlsPath);
-
-
         }
 
         public void convertXLStoCsv(object sender, EventArgs e)
@@ -85,8 +82,6 @@ namespace OptimaToPP
             {
                 MessageBox.Show("Ścieżka do pliku XLS nie może być pusta!");
             }
-
-
         }
 
         public void GenerateObjectFromCSV(string PathToCsv)
@@ -106,8 +101,6 @@ namespace OptimaToPP
                 MessageBox.Show(string.Format("{0}", e));
 
             }
-
-
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -127,9 +120,7 @@ namespace OptimaToPP
 
             // Create Worksheet from active sheet
             Microsoft.Office.Interop.Excel._Worksheet workSheet = excel.ActiveSheet;
-
-
-
+      
             try
             {
 
@@ -190,8 +181,7 @@ namespace OptimaToPP
                         workSheet.Cells[row, "L"] = string.Format(pack.Phone);
                     }
 
-                   
-                    workSheet.Cells[row, "M"] = "30";
+                     workSheet.Cells[row, "M"] = "30";
 
                     if (pack.Payment == "Pobranie")
                     {
