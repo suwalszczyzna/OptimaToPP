@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using Microsoft.Office.Interop;
 
 namespace OptimaToPP
 {
@@ -70,7 +71,7 @@ namespace OptimaToPP
             ExportToExcel(packs, SaveXlsPath);
         }
 
-        public void convertXLStoCsv(object sender, EventArgs e)
+        public void ConvertXLStoCsv(object sender, EventArgs e)
         {
             if (XLSpath.Text != "")
             {
@@ -119,7 +120,7 @@ namespace OptimaToPP
             excel.Workbooks.Add();
 
             // Create Worksheet from active sheet
-            Microsoft.Office.Interop.Excel._Worksheet workSheet = excel.ActiveSheet;
+            Microsoft.Office.Interop.Excel._Worksheet workSheet = (Microsoft.Office.Interop.Excel._Worksheet)excel.ActiveSheet;
       
             try
             {
@@ -150,7 +151,7 @@ namespace OptimaToPP
                     string street, city;
                     
 
-                    if (!pack.PostCity.Equals(string.Format(pack.City)) && pack.PostCity.Length != 0 )
+                    if (!pack.PostCity.Equals(string.Format(pack.City)) && pack.PostCity.Length > 3 )
                     {
                         city = pack.PostCity;
                         street = string.Format("{0}, ul. {1}", pack.City, pack.Street);
@@ -170,9 +171,9 @@ namespace OptimaToPP
                     workSheet.Cells[row, "I"] = "Polska";
                     workSheet.Cells[row, "J"] = string.Format(pack.Email);
 
-                    // Is mobile phone number or not?
+                    // Is mobile phone number?
 
-                    if (MobilePhoneChecker.IsMobile(pack.Phone))
+                    if (PhoneChecker.IsMobile(pack.Phone))
                     {
                         workSheet.Cells[row, "K"] = string.Format(pack.Phone);
                     }

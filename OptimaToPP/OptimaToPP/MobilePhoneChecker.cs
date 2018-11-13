@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OptimaToPP
 {
-    static class MobilePhoneChecker
+    static class PhoneChecker
     {
         static StringComparison Comparison = StringComparison.InvariantCulture;
 

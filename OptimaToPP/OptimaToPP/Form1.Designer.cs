@@ -74,7 +74,7 @@
             this.btnConvert.TabIndex = 2;
             this.btnConvert.Text = "Konwertuj";
             this.btnConvert.UseVisualStyleBackColor = true;
-            this.btnConvert.Click += new System.EventHandler(this.convertXLStoCsv);
+            this.btnConvert.Click += new System.EventHandler(this.ConvertXLStoCsv);
             // 
             // btnOpenFile
             // 
