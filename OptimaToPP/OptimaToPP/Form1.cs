@@ -124,26 +124,25 @@ namespace OptimaToPP
       
             try
             {
-
-                workSheet.Cells[1, "A"] = "NumerNadania";
-                workSheet.Cells[1, "B"] = "AdresatNazwa";
-                workSheet.Cells[1, "C"] = "AdresatNazwaCd";
-                workSheet.Cells[1, "D"] = "AdresatUlica";
-                workSheet.Cells[1, "E"] = "AdresatNumerDomu";
-                workSheet.Cells[1, "F"] = "AdresatNumerLokalu";
-                workSheet.Cells[1, "G"] = "AdresatKodPocztowy";
-                workSheet.Cells[1, "H"] = "AdresatMiejscowosc";
-                workSheet.Cells[1, "I"] = "AdresatKraj";
-                workSheet.Cells[1, "J"] = "AdresatEmail";
-                workSheet.Cells[1, "K"] = "AdresatMobile";
-                workSheet.Cells[1, "L"] = "AdresatTelefon";
-                workSheet.Cells[1, "M"] = "Masa";
-                workSheet.Cells[1, "N"] = "KwotaPobrania";
-                workSheet.Cells[1, "O"] = "NRB";
-                workSheet.Cells[1, "P"] = "TytulPobrania";
-                workSheet.Cells[1, "R"] = "Uwagi";
-                workSheet.Cells[1, "S"] = "Zawartosc";
-                workSheet.Cells[1, "T"] = "UiszczaOplate";
+                workSheet.Cells[1, "A"] = PPColumnNames.SENDING_NUMBER;
+                workSheet.Cells[1, "B"] = PPColumnNames.CUSTOMER_NAME_1;
+                workSheet.Cells[1, "C"] = PPColumnNames.CUSTOMER_NAME_2;
+                workSheet.Cells[1, "D"] = PPColumnNames.CUSTOMER_STREET;
+                workSheet.Cells[1, "E"] = PPColumnNames.CUSTOMER_HOME_NO_1;
+                workSheet.Cells[1, "F"] = PPColumnNames.CUSTOMER_HOME_NO_2;
+                workSheet.Cells[1, "G"] = PPColumnNames.CUSTOMER_POSTCODE;
+                workSheet.Cells[1, "H"] = PPColumnNames.CUSTOMER_CITY;
+                workSheet.Cells[1, "I"] = PPColumnNames.CUSTOMER_COUNTRY;
+                workSheet.Cells[1, "J"] = PPColumnNames.CUSTOMER_EMAIL;
+                workSheet.Cells[1, "K"] = PPColumnNames.CUSTOMER_MOBILE_PHONE;
+                workSheet.Cells[1, "L"] = PPColumnNames.CUSTOMER_PHONE;
+                workSheet.Cells[1, "M"] = PPColumnNames.WEIGHT;
+                workSheet.Cells[1, "N"] = PPColumnNames.CASH_ON_DELIVERY;
+                workSheet.Cells[1, "O"] = PPColumnNames.NBR;
+                workSheet.Cells[1, "P"] = PPColumnNames.TRANSFER_TITLE;
+                workSheet.Cells[1, "R"] = PPColumnNames.COMMENTS;
+                workSheet.Cells[1, "S"] = PPColumnNames.COMMENTS_2;
+                workSheet.Cells[1, "T"] = PPColumnNames.PAYMENT_COMPANY;
 
                 int row = 2; 
                 foreach (Pack pack in packs)
@@ -219,7 +218,6 @@ namespace OptimaToPP
                 MessageBox.Show("Exception",
                     "Błąd podczas zapisu pliku\n" + exception.Message,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
             finally
             {

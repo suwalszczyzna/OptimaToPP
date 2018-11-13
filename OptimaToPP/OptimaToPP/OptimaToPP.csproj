@@ -69,6 +69,7 @@
     <Compile Include="MobilePhoneChecker.cs" />
     <Compile Include="Pack.cs" />
     <Compile Include="PackMap.cs" />
+    <Compile Include="PPColumnNames.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
