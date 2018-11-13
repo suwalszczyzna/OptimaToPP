@@ -59,17 +59,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConverterXLStoCSV.cs" />
+    <Compile Include="Controllers\ConverterXLStoCSV.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="MobilePhoneChecker.cs" />
-    <Compile Include="Pack.cs" />
-    <Compile Include="PackMap.cs" />
-    <Compile Include="PPColumnNames.cs" />
+    <Compile Include="Controllers\PhoneChecker.cs" />
+    <Compile Include="Models\Pack.cs" />
+    <Compile Include="Models\PackMap.cs" />
+    <Compile Include="Models\PPColumnNames.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
