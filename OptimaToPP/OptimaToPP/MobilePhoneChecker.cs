@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace OptimaToPP
@@ -26,6 +27,21 @@ namespace OptimaToPP
                 }
             }
             return false;
+        }
+
+        public static string CleanPhoneNumber(string number)
+        {   
+                return RemoveCountryDirectionNumber(DigitsOnly(number));  
+        }
+
+        private static string RemoveCountryDirectionNumber(string number)
+        {
+            return Regex.Replace(number, @"^48|0048", "");
+        }
+
+        private static string DigitsOnly(string dirtyString)
+        {
+            return new String(dirtyString.Where(Char.IsDigit).ToArray());
         }
     }
 }
