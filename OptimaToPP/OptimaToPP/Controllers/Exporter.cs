@@ -118,7 +118,7 @@ namespace OptimaToPP.Controllers
 
                     workSheet.SaveAs(fileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlExcel8);
 
-                    MessageBox.Show(string.Format("Zapisano \n{0}", fileName));
+                    MessageBox.Show(string.Format("Pomyślnie zapisano plik: \n{0}", fileName), "Zapisano plik");
                     return 0;
                 }
                 catch (Exception exception)
