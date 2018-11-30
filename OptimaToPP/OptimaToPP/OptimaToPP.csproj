@@ -59,7 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ConverterXLStoCSV.cs" />
+    <Compile Include="Controllers\Converter.cs" />
+    <Compile Include="Controllers\Exporter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
