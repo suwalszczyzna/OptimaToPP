@@ -23,7 +23,6 @@ namespace OptimaToPP
         List<Pack> packs = new List<Pack>();
         string tempPath = System.IO.Path.GetTempPath();
         public Form1()
-
         {
             InitializeComponent();
             this.Text = "Optima & PP - integrator";
@@ -65,13 +64,16 @@ namespace OptimaToPP
                 RestoreDirectory = true
             };
 
-            saveFileDialog1.ShowDialog();
-            SaveXlsPath = saveFileDialog1.FileName;
-
-            packs = Converter.CSVtoListOfPacks(CsvSavePath);
-            Exporter.ToExcel(packs, SaveXlsPath);
+            if(saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                groupBox2.Enabled = false;
+                SaveXlsPath = saveFileDialog1.FileName;
+                packs = Converter.CSVtoListOfPacks(CsvSavePath);
+                Exporter.ToExcel(packs, SaveXlsPath);
+                this.Close();
+            }
+            
         }
-
         public void ConvertXLStoCsv(object sender, EventArgs e)
         {
             if (XLSpath.Text != "")
@@ -85,8 +87,6 @@ namespace OptimaToPP
                 MessageBox.Show("Ścieżka do pliku XLS nie może być pusta!");
             }
         }
-
-     
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
