@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace OptimaToPP.Controllers
 {
-    public static class ExportToExcel
+    public static class Exporter
     {
-        public static int Export(List<Pack> packs, string fileName)
+        public static int ToExcel(List<Pack> packs, string fileName)
         {
             // Load Excel application
             Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();

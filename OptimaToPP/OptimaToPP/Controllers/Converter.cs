@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
@@ -10,10 +11,10 @@ using System.Windows.Forms;
 
 namespace OptimaToPP
 {
-    public static class ConverterXLStoCSV
+    public static class Converter
     { 
 
-        public static void ConvertExcelToCsv(string excelFilePath, string csvOutputFile, int worksheetNumber = 1)
+        public static void XLStoCSV(string excelFilePath, string csvOutputFile, int worksheetNumber = 1)
         {
             if (!File.Exists(excelFilePath)) throw new FileNotFoundException(excelFilePath);
             if (File.Exists(csvOutputFile))
@@ -64,5 +65,25 @@ namespace OptimaToPP
             }
         }
 
+        public static List<Pack> CSVtoListOfPacks(string PathToCsv)
+        {
+            List<Pack> packs = new List<Pack>();
+            try
+            {
+                using (var streamReader = File.OpenText(PathToCsv))
+                {
+                    var reader = new CsvReader(streamReader);
+                    reader.Configuration.Delimiter = ";";
+                    reader.Configuration.RegisterClassMap<PackMap>();
+                    packs = reader.GetRecords<Pack>().ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(string.Format("{0}", e));
+
+            }
+            return packs;
+        }
     }
 }

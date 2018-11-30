@@ -47,7 +47,7 @@ namespace OptimaToPP
 
         private void saveXLSforPP(object sender, EventArgs e)
         {
-            GenerateObjectFromCSV(CsvSavePath);
+            
             string SaveXlsPath;
             DateTime dateTime = DateTime.UtcNow.Date;
             string todayDate = dateTime.ToString("dd-MM-yyyy");
@@ -68,15 +68,15 @@ namespace OptimaToPP
             saveFileDialog1.ShowDialog();
             SaveXlsPath = saveFileDialog1.FileName;
 
-            GenerateObjectFromCSV(CsvSavePath);
-            ExportToExcel.Export(packs, SaveXlsPath);
+            packs = Converter.CSVtoListOfPacks(CsvSavePath);
+            Exporter.ToExcel(packs, SaveXlsPath);
         }
 
         public void ConvertXLStoCsv(object sender, EventArgs e)
         {
             if (XLSpath.Text != "")
             {
-                ConverterXLStoCSV.ConvertExcelToCsv(XlsOpenPath, CsvSavePath, 1);
+                Converter.XLStoCSV(XlsOpenPath, CsvSavePath, 1);
                 groupBox2.Enabled = true;
                 groupBox1.Enabled = false;
             }
@@ -86,24 +86,7 @@ namespace OptimaToPP
             }
         }
 
-        public void GenerateObjectFromCSV(string PathToCsv)
-        {
-            try
-            {
-                using (var streamReader = File.OpenText(PathToCsv))
-                {
-                    var reader = new CsvReader(streamReader);
-                    reader.Configuration.Delimiter = ";";
-                    reader.Configuration.RegisterClassMap<PackMap>();
-                    packs = reader.GetRecords<Pack>().ToList();
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(string.Format("{0}", e));
-
-            }
-        }
+     
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
