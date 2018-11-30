@@ -22,25 +22,25 @@ namespace OptimaToPP.Controllers
 
             try
             {
-                workSheet.Cells[1, "A"] = PPColumnNames.SENDING_NUMBER;
-                workSheet.Cells[1, "B"] = PPColumnNames.CUSTOMER_NAME_1;
-                workSheet.Cells[1, "C"] = PPColumnNames.CUSTOMER_NAME_2;
-                workSheet.Cells[1, "D"] = PPColumnNames.CUSTOMER_STREET;
-                workSheet.Cells[1, "E"] = PPColumnNames.CUSTOMER_HOME_NO_1;
-                workSheet.Cells[1, "F"] = PPColumnNames.CUSTOMER_HOME_NO_2;
-                workSheet.Cells[1, "G"] = PPColumnNames.CUSTOMER_POSTCODE;
-                workSheet.Cells[1, "H"] = PPColumnNames.CUSTOMER_CITY;
-                workSheet.Cells[1, "I"] = PPColumnNames.CUSTOMER_COUNTRY;
-                workSheet.Cells[1, "J"] = PPColumnNames.CUSTOMER_EMAIL;
-                workSheet.Cells[1, "K"] = PPColumnNames.CUSTOMER_MOBILE_PHONE;
-                workSheet.Cells[1, "L"] = PPColumnNames.CUSTOMER_PHONE;
-                workSheet.Cells[1, "M"] = PPColumnNames.WEIGHT;
-                workSheet.Cells[1, "N"] = PPColumnNames.CASH_ON_DELIVERY;
-                workSheet.Cells[1, "O"] = PPColumnNames.NBR;
-                workSheet.Cells[1, "P"] = PPColumnNames.TRANSFER_TITLE;
-                workSheet.Cells[1, "R"] = PPColumnNames.COMMENTS;
-                workSheet.Cells[1, "S"] = PPColumnNames.COMMENTS_2;
-                workSheet.Cells[1, "T"] = PPColumnNames.PAYMENT_COMPANY;
+                workSheet.Cells[1, "A"] = PpColumns._sending_number;
+                workSheet.Cells[1, "B"] = PpColumns._customerName1;
+                workSheet.Cells[1, "C"] = PpColumns._customerName2;
+                workSheet.Cells[1, "D"] = PpColumns._customerStreet;
+                workSheet.Cells[1, "E"] = PpColumns._customerHome1;
+                workSheet.Cells[1, "F"] = PpColumns._customerHome2;
+                workSheet.Cells[1, "G"] = PpColumns._customerPost;
+                workSheet.Cells[1, "H"] = PpColumns._customerCity;
+                workSheet.Cells[1, "I"] = PpColumns._customerCountry;
+                workSheet.Cells[1, "J"] = PpColumns._customerEmail;
+                workSheet.Cells[1, "K"] = PpColumns._customerMobilePhone;
+                workSheet.Cells[1, "L"] = PpColumns._customerPhone;
+                workSheet.Cells[1, "M"] = PpColumns._weight;
+                workSheet.Cells[1, "N"] = PpColumns._cashOnDelivery;
+                workSheet.Cells[1, "O"] = PpColumns._NBR;
+                workSheet.Cells[1, "P"] = PpColumns._tranfserTitle;
+                workSheet.Cells[1, "R"] = PpColumns._comments1;
+                workSheet.Cells[1, "S"] = PpColumns._comments2;
+                workSheet.Cells[1, "T"] = PpColumns._payer;
 
                 int row = 2;
                 foreach (Pack pack in packs)
@@ -48,10 +48,18 @@ namespace OptimaToPP.Controllers
                     string street, city;
 
 
-                    if (!pack.PostCity.Equals(string.Format(pack.City)) && pack.PostCity.Length > 3)
+
+                    if (!pack.PostCity.Equals(string.Format(pack.City)) && !String.IsNullOrEmpty(pack.PostCity))
                     {
+                        if (!String.IsNullOrEmpty(pack.Street))
+                        {
+                            street = string.Format("{0}, ul. {1}", pack.City, pack.Street);
+                        }
+                        else
+                        {
+                            street = string.Format(pack.City);
+                        }
                         city = pack.PostCity;
-                        street = string.Format("{0}, ul. {1}", pack.City, pack.Street);
                     }
                     else
                     {
@@ -135,9 +143,9 @@ namespace OptimaToPP.Controllers
 
                 // Force garbage collector cleaning
                 GC.Collect();
-                
+
             }
-            
+
 
         }
     }
