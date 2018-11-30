@@ -44,7 +44,7 @@ namespace OptimaToPP
             }
         }
 
-        private void saveXLSforPP(object sender, EventArgs e)
+        private async void saveXLSforPP(object sender, EventArgs e)
         {
             
             string SaveXlsPath;
@@ -68,8 +68,8 @@ namespace OptimaToPP
             {
                 groupBox2.Enabled = false;
                 SaveXlsPath = saveFileDialog1.FileName;
-                packs = Converter.CSVtoListOfPacks(CsvSavePath);
-                Exporter.ToExcel(packs, SaveXlsPath);
+                packs = await Converter.CSVtoListOfPacks(CsvSavePath);
+                await Exporter.ToExcel(packs, SaveXlsPath);
                 this.Close();
             }
             

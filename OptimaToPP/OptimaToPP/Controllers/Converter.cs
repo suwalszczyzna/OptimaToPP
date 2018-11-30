@@ -12,10 +12,11 @@ using System.Windows.Forms;
 namespace OptimaToPP
 {
     public static class Converter
-    { 
+    {
 
         public static void XLStoCSV(string excelFilePath, string csvOutputFile, int worksheetNumber = 1)
         {
+
             if (!File.Exists(excelFilePath)) throw new FileNotFoundException(excelFilePath);
             if (File.Exists(csvOutputFile))
             {
@@ -38,8 +39,8 @@ namespace OptimaToPP
                 da.Fill(dt);
             }
             catch (Exception e)
-            {                
-                MessageBox.Show(string.Format("{0}",e));
+            {
+                MessageBox.Show(string.Format("{0}", e));
 
             }
             finally
@@ -65,25 +66,28 @@ namespace OptimaToPP
             }
         }
 
-        public static List<Pack> CSVtoListOfPacks(string PathToCsv)
+        public static async Task<List<Pack>> CSVtoListOfPacks(string PathToCsv)
         {
-            List<Pack> packs = new List<Pack>();
-            try
+            return await Task.Run(() =>
             {
-                using (var streamReader = File.OpenText(PathToCsv))
+                List<Pack> packs = new List<Pack>();
+                try
                 {
-                    var reader = new CsvReader(streamReader);
-                    reader.Configuration.Delimiter = ";";
-                    reader.Configuration.RegisterClassMap<PackMap>();
-                    packs = reader.GetRecords<Pack>().ToList();
+                    using (var streamReader = File.OpenText(PathToCsv))
+                    {
+                        var reader = new CsvReader(streamReader);
+                        reader.Configuration.Delimiter = ";";
+                        reader.Configuration.RegisterClassMap<PackMap>();
+                        packs = reader.GetRecords<Pack>().ToList();
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(string.Format("{0}", e));
+                catch (Exception e)
+                {
+                    MessageBox.Show(string.Format("{0}", e));
 
-            }
-            return packs;
+                }
+                return packs;
+            });
         }
     }
 }
