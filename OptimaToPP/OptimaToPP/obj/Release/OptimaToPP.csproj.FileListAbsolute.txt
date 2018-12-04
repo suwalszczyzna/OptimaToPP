@@ -9,3 +9,18 @@ C:\Users\dsuwa\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\Opt
 C:\Users\dsuwa\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\OptimaToPP.csproj.CoreCompileInputs.cache
 C:\Users\dsuwa\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\OptimaToPP.exe
 C:\Users\dsuwa\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\OptimaToPP.pdb
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Release\OptimaToPP.exe.config
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Release\OptimaToPP.exe
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Release\OptimaToPP.pdb
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Release\CsvHelper.dll
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Release\Microsoft.Office.Interop.Excel.dll
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Release\stdole.dll
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\bin\Release\CsvHelper.xml
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\OptimaToPP.csprojAssemblyReference.cache
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\OptimaToPP.Form1.resources
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\OptimaToPP.Properties.Resources.resources
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\OptimaToPP.csproj.GenerateResource.cache
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\OptimaToPP.csproj.CoreCompileInputs.cache
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\OptimaToPP.csproj.CopyComplete
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\OptimaToPP.exe
+C:\Users\Damian Suwała\Documents\GitHub\OptimaToPP\OptimaToPP\OptimaToPP\obj\Release\OptimaToPP.pdb
